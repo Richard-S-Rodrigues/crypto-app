@@ -4,7 +4,7 @@ const api = axios.create({
   baseURL: "https://coinranking1.p.rapidapi.com",
   headers: {
     "x-rapidapi-host": "coinranking1.p.rapidapi.com",
-    "x-rapidapi-key": "de6c50938dmsh5e04042f2fbbdeap11c58cjsn225b58e4834f"
+    "x-rapidapi-key": import.meta.env.VITE_RAPIDAPI_KEY as string | number
   }
 });
 
