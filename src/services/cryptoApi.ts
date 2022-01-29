@@ -8,7 +8,7 @@ const api = axios.create({
   }
 });
 
-export const getAllCoins = async () => {
+export const getCoins = async (limit?: string) => {
   try {
     const response = await api.get("/coins", {
       params: {
@@ -17,11 +17,14 @@ export const getAllCoins = async () => {
         tiers: "1",
         orderBy: "marketCap",
         orderDirection: "desc",
-        limit: "50",
+        limit: limit || "50",
         offset: "0"
       }
     });
-    console.log(response);
+
+    if (response.status === 200) {
+      return response.data.data;
+    }
   } catch (err) {
     console.log(err);
   }
