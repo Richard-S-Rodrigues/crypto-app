@@ -25,6 +25,16 @@ export const GlobalStyle = createGlobalStyle`
 
 `;
 
+export const AppContainer = styled.div`
+  display: block;
+
+  @media (min-width: 650px) {
+    & {
+      display: flex;
+    }
+  }
+`;
+
 export const Title = styled.h1`
   font-size: 1.5em;
   line-height: 1.5;

@@ -1,17 +1,57 @@
 import styled from "styled-components";
+import { GiHamburgerMenu } from "react-icons/gi";
 
 export const Wrapper = styled.div`
   width: 100%;
   background-color: var(--color-darker-blue);
   color: #fff;
 
-  main {
-    width: 80%;
-    margin: auto;
-    padding: 1em 0;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  @media (min-width: 650px) {
+    & {
+      width: 14em;
+      height: 100vh;
+    }
+  }
+`;
+
+export const HamburgerMenu = styled(GiHamburgerMenu)`
+  width: 1.5em;
+  height: 1.5em;
+  cursor: pointer;
+
+  @media (min-width: 650px) {
+    & {
+      display: none;
+    }
+  }
+`;
+
+export const TitleContainer = styled.section`
+  width: 80%;
+  margin: auto;
+  padding: 1em 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+export const NavigationContainer = styled.section`
+  display: none;
+
+  @media (min-width: 650px) {
+    & {
+      display: block;
+      width: 80%;
+      margin: 1em auto;
+    }
+
+    nav ul {
+      list-style: none;
+    }
+
+    nav ul li {
+      margin-top: 2em;
+    }
   }
 `;
 
