@@ -1,10 +1,16 @@
-import "./App.css";
+import SideBar from "./components/SideBar";
 import Home from "./pages/Home";
 
+import { GlobalStyle } from "./globalStyles";
+
 const App = () => (
-  <div>
-    <Home />
-  </div>
+  <>
+    <GlobalStyle />
+    <div>
+      <SideBar />
+      <Home />
+    </div>
+  </>
 );
 
 export default App;
