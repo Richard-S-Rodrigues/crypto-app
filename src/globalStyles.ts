@@ -25,7 +25,7 @@ export const GlobalStyle = createGlobalStyle`
 
 `;
 
-export const AppContainer = styled.div`
+export const AppWrapper = styled.div`
   display: block;
 
   @media (min-width: 650px) {

@@ -8,8 +8,9 @@ export const Wrapper = styled.div`
 
   @media (min-width: 650px) {
     & {
-      width: 14em;
-      height: 100vh;
+      width: 20em;
+      min-height: 100vh;
+      height: auto;
     }
   }
 `;

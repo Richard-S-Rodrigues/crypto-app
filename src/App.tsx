@@ -1,13 +1,13 @@
 import AppRoutes from "./AppRoutes";
 
-import { AppContainer, GlobalStyle } from "./globalStyles";
+import { AppWrapper, GlobalStyle } from "./globalStyles";
 
 const App = () => (
   <>
     <GlobalStyle />
-    <AppContainer>
+    <AppWrapper>
       <AppRoutes />
-    </AppContainer>
+    </AppWrapper>
   </>
 );
 
