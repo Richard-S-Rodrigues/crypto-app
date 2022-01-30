@@ -39,6 +39,6 @@ export const MenuWrapper = styled.div`
     display: flex;
     align-items: center;
     font-size: 1.2em;
-    margin-top: 1em;
+    margin-top: 2em;
   }
 `;

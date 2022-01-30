@@ -1,13 +1,15 @@
 import { useState } from "react";
-import { Title } from "../../globalStyles";
+
+import { Title, NavLink } from "../../globalStyles";
 import { Wrapper, MenuWrapper } from "./styles";
+
 import { GiHamburgerMenu } from "react-icons/gi";
 import { CgClose } from "react-icons/cg";
 import { FaHome, FaCoins } from "react-icons/fa";
 import { BsCurrencyExchange, BsNewspaper } from "react-icons/bs";
 
 const SideBar = () => {
-  const [isMenu, setIsMenu] = useState(true);
+  const [isMenu, setIsMenu] = useState(false);
 
   return !isMenu ? (
     <Wrapper>
@@ -37,19 +39,27 @@ const SideBar = () => {
         <nav>
           <ul>
             <li>
-              <FaHome /> <span style={{ marginLeft: "1em" }}>Home</span>
+              <NavLink to="/">
+                <FaHome /> <span style={{ marginLeft: "1em" }}>Home</span>
+              </NavLink>
             </li>
             <li>
-              <FaCoins />
-              <span style={{ marginLeft: "1em" }}>Cryptocurrencies</span>
+              <NavLink to="/cryptocurrencies">
+                <FaCoins />
+                <span style={{ marginLeft: "1em" }}>Cryptocurrencies</span>
+              </NavLink>
             </li>
             <li>
-              <BsCurrencyExchange />
-              <span style={{ marginLeft: "1em" }}>Exchanges</span>
+              <NavLink to="/exchanges">
+                <BsCurrencyExchange />
+                <span style={{ marginLeft: "1em" }}>Exchanges</span>
+              </NavLink>
             </li>
             <li>
-              <BsNewspaper />
-              <span style={{ marginLeft: "1em" }}>News</span>
+              <NavLink to="/news">
+                <BsNewspaper />
+                <span style={{ marginLeft: "1em" }}>News</span>
+              </NavLink>
             </li>
           </ul>
         </nav>

@@ -1,7 +1,8 @@
 import styled, { createGlobalStyle, css } from "styled-components";
 
+import { Link } from "react-router-dom";
+
 export const GlobalStyle = createGlobalStyle`
-  @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap');
 
   :root {
     --color-light-grey: #f7f7f7 ;
@@ -28,6 +29,22 @@ export const Title = styled.h1`
   font-size: 1.5em;
   line-height: 1.5;
   font-weight: 600;
+`;
+
+export const NavLink = styled(Link)`
+  color: #fff;
+  text-decoration: none;
+  transition: 0.8s color;
+
+  &:hover {
+    color: var(--color-cyan);
+  }
+
+  ${(props: any) =>
+    props.to === window.location.pathname &&
+    css`
+      color: var(--color-cyan);
+    `}
 `;
 
 export const Button = styled.button`

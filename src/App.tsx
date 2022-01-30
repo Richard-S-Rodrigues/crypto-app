@@ -1,15 +1,11 @@
-import SideBar from "./components/SideBar";
-import Home from "./pages/Home";
+import AppRoutes from "./AppRoutes";
 
 import { GlobalStyle } from "./globalStyles";
 
 const App = () => (
   <>
     <GlobalStyle />
-    <div>
-      <SideBar />
-      <Home />
-    </div>
+    <AppRoutes />
   </>
 );
 
