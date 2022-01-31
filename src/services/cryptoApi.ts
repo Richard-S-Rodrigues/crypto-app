@@ -5,14 +5,53 @@ const api = axios.create({
   headers: {
     "x-rapidapi-host": "coinranking1.p.rapidapi.com",
     "x-rapidapi-key": import.meta.env.VITE_RAPIDAPI_KEY as string | number
+  },
+  params: {
+    referenceCurrencyUuid: "yhjMzLPhuIDl"
   }
 });
 
-export const getCoins = async (limit?: string) => {
+interface IGetCryptoStatsResponse {
+  total24hVolume: string;
+  totalCoins: number;
+  totalExchanges: number;
+  totalMarketCap: string;
+  totalMarkets: number;
+}
+
+export const getCryptoStats = async (): Promise<IGetCryptoStatsResponse> => {
+  try {
+    const response = await api.get("/stats");
+
+    return response.data.data;
+  } catch (err: any) {
+    console.log(err);
+    return err;
+  }
+};
+
+interface IGetCoinsResponse {
+  uuid: string;
+  "24hVolume": string;
+  btcPrice: string;
+  change: string;
+  color: string;
+  iconUrl: string;
+  listedAt: number;
+  lowVolume: boolean;
+  marketCap: string;
+  name: string;
+  price: string;
+  rank: number;
+  symbol: string;
+}
+
+export const getCoins = async (
+  limit?: string
+): Promise<IGetCoinsResponse[]> => {
   try {
     const response = await api.get("/coins", {
       params: {
-        referenceCurrencyUuid: "yhjMzLPhuIDl",
         timePeriod: "24h",
         tiers: "1",
         orderBy: "marketCap",
@@ -22,18 +61,17 @@ export const getCoins = async (limit?: string) => {
       }
     });
 
-    if (response.status === 200) {
-      return response.data.data;
-    }
-  } catch (err) {
+    return response.data.data.coins;
+  } catch (err: any) {
     console.log(err);
+    return err;
   }
 };
 
 export const getCoin = async (coinId: string) => {
   try {
     const response = await api.get(`/coin/${coinId}`, {
-      params: { referenceCurrencyUuid: "yhjMzLPhuIDl", timePeriod: "24h" }
+      params: { timePeriod: "24h" }
     });
 
     console.log(response);
@@ -45,7 +83,7 @@ export const getCoin = async (coinId: string) => {
 export const getCoinPriceHistory = async (coinId: string) => {
   try {
     const response = await api.get(`/coin/${coinId}/history`, {
-      params: { referenceCurrencyUuid: "yhjMzLPhuIDl", timePeriod: "24h" }
+      params: { timePeriod: "24h" }
     });
 
     console.log(response);
@@ -57,7 +95,7 @@ export const getCoinPriceHistory = async (coinId: string) => {
 export const getCoinExchanges = async (coinId: string) => {
   try {
     const response = await api.get(`/coin/${coinId}/exchanges`, {
-      params: { referenceCurrencyUuid: "yhjMzLPhuIDl", timePeriod: "24h" }
+      params: { timePeriod: "24h" }
     });
 
     console.log(response);

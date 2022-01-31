@@ -5,7 +5,8 @@ import { Link } from "react-router-dom";
 export const GlobalStyle = createGlobalStyle`
 
   :root {
-    --color-light-grey: #f7f7f7 ;
+    --color-light-grey: #f7f7f7;
+    --color-grey: #808080;
     --color-light-blue: #3f50e8;
     --color-blue: #007aff;
     --color-darker-blue: #0a1045;
@@ -39,6 +40,11 @@ export const Title = styled.h1`
   font-size: 1.5em;
   line-height: 1.5;
   font-weight: 600;
+`;
+
+export const NormalLink = styled(Link)`
+  color: var(--color-darker-cyan);
+  text-decoration: none;
 `;
 
 export const NavLink = styled(Link)`

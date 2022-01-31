@@ -9,40 +9,44 @@ export const Wrapper = styled.div`
   }
 `;
 
-export const CardWrapper = styled.div`
+export const StatsWrapper = styled.div`
   display: block;
+  margin-bottom: 4em;
 
   @media (min-width: 650px) {
     & {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-      grid-gap: 1.5em;
+      grid-gap: 1em;
+    }
+  }
+
+  div {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1em;
+
+    @media (min-width: 650px) {
+      display: grid;
+    }
+  }
+
+  div small {
+    font-size: 1em;
+    color: var(--color-grey);
+  }
+
+  div span {
+    font-weight: 600;
+
+    @media (min-width: 650px) {
+      margin-top: 0.5em;
     }
   }
 `;
 
-export const Card = styled.div`
-  width: 100%;
-  height: auto;
-  background-color: #ddd;
-  margin-top: 1em;
-`;
-
-export const CardHeader = styled.section`
-  text-align: center;
-  padding: 1em 0;
-  border-bottom: 1px solid var(--color-light-grey);
-
-  img {
-    width: 5em;
-    height: 5em;
-  }
-`;
-export const CardBody = styled.section`
-  display: block;
-  padding: 1em;
-
-  p {
-    margin-top: 1em;
+export const CryptocurrenciesContainer = styled.section`
+  & div:first-child {
+    display: flex;
   }
 `;
