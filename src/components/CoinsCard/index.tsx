@@ -1,5 +1,6 @@
-import { useEffect, useState } from "react";
+import { LegacyRef, useEffect, useState } from "react";
 import millify from "millify";
+import handleViewport from "react-in-viewport";
 import { getCoins } from "../../services/cryptoApi";
 
 import Loading from "react-loading";
@@ -8,6 +9,7 @@ import { Card, CardBody, CardHeader, CardWrapper } from "./styles";
 
 interface ICoinsCardProps {
   limit?: string;
+  noScrollLoad?: boolean; // Does not load more contents when scrolled down
 }
 
 interface ICoinsData {
@@ -26,18 +28,47 @@ interface ICoinsData {
   symbol: string;
 }
 
-const CoinsCard = ({ limit }: ICoinsCardProps) => {
+interface IBlockProps {
+  inViewport: boolean;
+  forwardedRef: LegacyRef<HTMLDivElement> | undefined;
+}
+
+const Block = ({ inViewport, forwardedRef }: IBlockProps) => {
+  return (
+    <div ref={forwardedRef}>
+      {inViewport && <Loading color="var(--color-darker-cyan)" />}
+    </div>
+  );
+};
+const ViewportBlock = handleViewport(Block);
+
+const CoinsCard = ({ limit, noScrollLoad }: ICoinsCardProps) => {
   const [coinsData, setCoinsData] = useState<ICoinsData[]>([]);
+  const [newLimit, setNewLimit] = useState(Number(limit) || 50);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    const getData = async () => {
-      const coins = await getCoins(limit);
+    setIsLoading(true);
 
-      setCoinsData(coins);
+    const getData = async (newLimit: number) => {
+      if (newLimit > 1 && newLimit <= 100) {
+        const coins = await getCoins(String(newLimit));
+
+        if (coins) {
+          setCoinsData(coins);
+          setIsLoading(false);
+        }
+      }
     };
 
-    getData();
-  }, []);
+    getData(newLimit);
+  }, [newLimit]);
+
+  const handleCardsLimit = (cardsLimit: number) => {
+    if (isLoading) return;
+
+    setNewLimit(cardsLimit + 10);
+  };
 
   return (
     <CardWrapper>
@@ -58,6 +89,9 @@ const CoinsCard = ({ limit }: ICoinsCardProps) => {
             </CardBody>
           </Card>
         ))
+      )}
+      {newLimit <= 100 && !noScrollLoad && (
+        <ViewportBlock onEnterViewport={() => handleCardsLimit(newLimit)} />
       )}
     </CardWrapper>
   );

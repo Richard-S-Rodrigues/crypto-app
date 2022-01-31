@@ -62,7 +62,7 @@ const Home = () => {
             <Title>Top 10 Cryptocurrencies</Title>
             <NormalLink to="/cryptocurrencies">Show more</NormalLink>
           </div>
-          <CoinsCard limit={"10"} />
+          <CoinsCard limit={"10"} noScrollLoad />
         </section>
       </main>
     </Wrapper>
