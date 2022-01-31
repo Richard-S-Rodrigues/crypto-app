@@ -6,6 +6,10 @@ import Loading from "react-loading";
 
 import { Card, CardBody, CardHeader, CardWrapper } from "./styles";
 
+interface ICoinsCardProps {
+  limit?: string;
+}
+
 interface ICoinsData {
   uuid: string;
   "24hVolume": string;
@@ -22,12 +26,12 @@ interface ICoinsData {
   symbol: string;
 }
 
-const CoinsCard = () => {
+const CoinsCard = ({ limit }: ICoinsCardProps) => {
   const [coinsData, setCoinsData] = useState<ICoinsData[]>([]);
 
   useEffect(() => {
     const getData = async () => {
-      const coins = await getCoins("10");
+      const coins = await getCoins(limit);
 
       setCoinsData(coins);
     };

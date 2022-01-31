@@ -56,11 +56,15 @@ export const NavLink = styled(Link)`
     color: var(--color-cyan);
   }
 
-  ${(props: any) =>
-    props.to === window.location.pathname &&
-    css`
-      color: var(--color-cyan);
-    `}
+  ${(props: any) => {
+    console.log(props);
+    return (
+      props.to === window.location.pathname &&
+      css`
+        color: var(--color-cyan);
+      `
+    );
+  }}
 `;
 
 export const Button = styled.button`
