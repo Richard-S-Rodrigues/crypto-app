@@ -67,15 +67,15 @@ export const NavLink = styled(Link)`
   }}
 `;
 
-export const Button = styled.button`
-  border: 0;
+export const Input = styled.input`
   width: 100%;
-  cursor: pointer;
+  border: 0;
+  border-radius: 0.25rem;
+  padding: 1em;
+  font-size: 1em;
 
-  ${(props: any) =>
-    props.primary &&
-    css`
-      background: blue;
-      color: white;
-    `}
+  &:focus {
+    outline: none;
+    border: 1px solid var(--color-cyan);
+  }
 `;

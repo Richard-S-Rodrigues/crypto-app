@@ -9,7 +9,8 @@ import { Card, CardBody, CardHeader, CardWrapper } from "./styles";
 
 interface ICoinsCardProps {
   limit?: string;
-  noScrollLoad?: boolean; // Does not load more contents when scrolled down
+  noScrollLoad?: boolean; // if "true" does not load more contents when scrolled down
+  searchValue: string;
 }
 
 interface ICoinsData {
@@ -42,7 +43,7 @@ const Block = ({ inViewport, forwardedRef }: IBlockProps) => {
 };
 const ViewportBlock = handleViewport(Block);
 
-const CoinsCard = ({ limit, noScrollLoad }: ICoinsCardProps) => {
+const CoinsCard = ({ limit, noScrollLoad, searchValue }: ICoinsCardProps) => {
   const [coinsData, setCoinsData] = useState<ICoinsData[]>([]);
   const [newLimit, setNewLimit] = useState(Number(limit) || 50);
   const [isLoading, setIsLoading] = useState(false);
@@ -53,16 +54,33 @@ const CoinsCard = ({ limit, noScrollLoad }: ICoinsCardProps) => {
     const getData = async (newLimit: number) => {
       if (newLimit > 1 && newLimit <= 100) {
         const coins = await getCoins(String(newLimit));
-
+        console.log(coins);
         if (coins) {
           setCoinsData(coins);
-          setIsLoading(false);
         }
       }
     };
 
-    getData(newLimit);
-  }, [newLimit]);
+    if (searchValue) {
+      getFilteredData(searchValue);
+    } else {
+      getData(newLimit);
+    }
+    setIsLoading(false);
+  }, [newLimit, searchValue]);
+
+  const getFilteredData = async (name: string) => {
+    const coins = await getCoins("100");
+    const filteredCoins = [] as ICoinsData[];
+
+    coins.forEach((coin) => {
+      if (coin.name.toLowerCase().indexOf(name) !== -1) {
+        filteredCoins.push(coin);
+      }
+    });
+
+    setCoinsData(filteredCoins);
+  };
 
   const handleCardsLimit = (cardsLimit: number) => {
     if (isLoading) return;
@@ -72,8 +90,10 @@ const CoinsCard = ({ limit, noScrollLoad }: ICoinsCardProps) => {
 
   return (
     <CardWrapper>
-      {!coinsData.length ? (
-        <Loading color="var(--color-cyan)" />
+      {isLoading && <Loading color="var(--color-cyan)" />}
+
+      {!coinsData.length && !isLoading ? (
+        <div>Cryptocurrencies not found!</div>
       ) : (
         coinsData.map((coin) => (
           <Card key={coin.uuid}>
@@ -90,7 +110,7 @@ const CoinsCard = ({ limit, noScrollLoad }: ICoinsCardProps) => {
           </Card>
         ))
       )}
-      {newLimit <= 100 && !noScrollLoad && (
+      {newLimit <= 100 && !noScrollLoad && coinsData.length > 0 && (
         <ViewportBlock onEnterViewport={() => handleCardsLimit(newLimit)} />
       )}
     </CardWrapper>
