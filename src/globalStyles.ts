@@ -48,23 +48,13 @@ export const NormalLink = styled(Link)`
 `;
 
 export const NavLink = styled(Link)`
-  color: #fff;
+  color: ${(props) => props.color || "#fff"};
   text-decoration: none;
   transition: 0.8s color;
 
   &:hover {
     color: var(--color-cyan);
   }
-
-  ${(props: any) => {
-    console.log(props);
-    return (
-      props.to === window.location.pathname &&
-      css`
-        color: var(--color-cyan);
-      `
-    );
-  }}
 `;
 
 export const Input = styled.input`

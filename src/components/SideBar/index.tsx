@@ -12,9 +12,11 @@ import {
 import { CgClose } from "react-icons/cg";
 import { FaHome, FaCoins } from "react-icons/fa";
 import { BsCurrencyExchange, BsNewspaper } from "react-icons/bs";
+import { useLocation } from "react-router-dom";
 
 const SideBar = () => {
   const [isMenu, setIsMenu] = useState(false);
+  const { pathname: location } = useLocation();
 
   return !isMenu ? (
     <Wrapper>
@@ -31,24 +33,38 @@ const SideBar = () => {
           <nav>
             <ul>
               <li>
-                <NavLink to="/">
+                <NavLink
+                  to="/"
+                  color={location === "/" ? "var(--color-cyan)" : ""}
+                >
                   <FaHome /> <span style={{ marginLeft: "1em" }}>Home</span>
                 </NavLink>
               </li>
               <li>
-                <NavLink to="/cryptocurrencies">
+                <NavLink
+                  to="/cryptocurrencies"
+                  color={
+                    location === "/cryptocurrencies" ? "var(--color-cyan)" : ""
+                  }
+                >
                   <FaCoins />
                   <span style={{ marginLeft: "1em" }}>Cryptocurrencies</span>
                 </NavLink>
               </li>
               <li>
-                <NavLink to="/exchanges">
+                <NavLink
+                  to="/exchanges"
+                  color={location === "/exchanges" ? "var(--color-cyan)" : ""}
+                >
                   <BsCurrencyExchange />
                   <span style={{ marginLeft: "1em" }}>Exchanges</span>
                 </NavLink>
               </li>
               <li>
-                <NavLink to="/news">
+                <NavLink
+                  to="/news"
+                  color={location === "/news" ? "var(--color-cyan)" : ""}
+                >
                   <BsNewspaper />
                   <span style={{ marginLeft: "1em" }}>News</span>
                 </NavLink>
@@ -75,24 +91,42 @@ const SideBar = () => {
         <nav>
           <ul>
             <li>
-              <NavLink to="/" onClick={() => setIsMenu(false)}>
+              <NavLink
+                to="/"
+                color={location === "/" ? "var(--color-cyan)" : ""}
+                onClick={() => setIsMenu(false)}
+              >
                 <FaHome /> <span style={{ marginLeft: "1em" }}>Home</span>
               </NavLink>
             </li>
             <li>
-              <NavLink to="/cryptocurrencies" onClick={() => setIsMenu(false)}>
+              <NavLink
+                to="/cryptocurrencies"
+                color={
+                  location === "/cryptocurrencies" ? "var(--color-cyan)" : ""
+                }
+                onClick={() => setIsMenu(false)}
+              >
                 <FaCoins />
                 <span style={{ marginLeft: "1em" }}>Cryptocurrencies</span>
               </NavLink>
             </li>
             <li>
-              <NavLink to="/exchanges" onClick={() => setIsMenu(false)}>
+              <NavLink
+                to="/exchanges"
+                color={location === "/exchanges" ? "var(--color-cyan)" : ""}
+                onClick={() => setIsMenu(false)}
+              >
                 <BsCurrencyExchange />
                 <span style={{ marginLeft: "1em" }}>Exchanges</span>
               </NavLink>
             </li>
             <li>
-              <NavLink to="/news" onClick={() => setIsMenu(false)}>
+              <NavLink
+                to="/news"
+                color={location === "/news" ? "var(--color-cyan)" : ""}
+                onClick={() => setIsMenu(false)}
+              >
                 <BsNewspaper />
                 <span style={{ marginLeft: "1em" }}>News</span>
               </NavLink>

@@ -10,7 +10,7 @@ import { Card, CardBody, CardHeader, CardWrapper } from "./styles";
 interface ICoinsCardProps {
   limit?: string;
   noScrollLoad?: boolean; // if "true" does not load more contents when scrolled down
-  searchValue: string;
+  searchValue?: string;
 }
 
 interface ICoinsData {
@@ -45,46 +45,45 @@ const ViewportBlock = handleViewport(Block);
 
 const CoinsCard = ({ limit, noScrollLoad, searchValue }: ICoinsCardProps) => {
   const [coinsData, setCoinsData] = useState<ICoinsData[]>([]);
+  const [filteredCoinsData, setFilteredCoinsData] = useState<ICoinsData[]>([]);
   const [newLimit, setNewLimit] = useState(Number(limit) || 50);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    setIsLoading(true);
-
     const getData = async (newLimit: number) => {
-      if (newLimit > 1 && newLimit <= 100) {
-        const coins = await getCoins(String(newLimit));
-        console.log(coins);
-        if (coins) {
-          setCoinsData(coins);
-        }
+      const coins = await getCoins(String(newLimit > 100 ? 100 : newLimit));
+      if (coins) {
+        setCoinsData(coins);
       }
     };
 
-    if (searchValue) {
-      getFilteredData(searchValue);
-    } else {
-      getData(newLimit);
-    }
+    getData(newLimit);
     setIsLoading(false);
-  }, [newLimit, searchValue]);
+  }, [newLimit]);
 
-  const getFilteredData = async (name: string) => {
-    const coins = await getCoins("100");
-    const filteredCoins = [] as ICoinsData[];
+  useEffect(() => {
+    setFilteredCoinsData([]);
 
-    coins.forEach((coin) => {
-      if (coin.name.toLowerCase().indexOf(name) !== -1) {
-        filteredCoins.push(coin);
-      }
-    });
+    const getFilteredData = async (name: string) => {
+      const coins = await getCoins("100");
+      const filteredCoins = [] as ICoinsData[];
 
-    setCoinsData(filteredCoins);
-  };
+      coins.forEach((coin) => {
+        if (coin.name.toLowerCase().indexOf(name.trim()) !== -1) {
+          filteredCoins.push(coin);
+        }
+      });
+
+      setFilteredCoinsData(filteredCoins);
+    };
+
+    if (searchValue?.trim()) {
+      getFilteredData(searchValue);
+    }
+  }, [searchValue]);
 
   const handleCardsLimit = (cardsLimit: number) => {
     if (isLoading) return;
-
     setNewLimit(cardsLimit + 10);
   };
 
@@ -92,7 +91,22 @@ const CoinsCard = ({ limit, noScrollLoad, searchValue }: ICoinsCardProps) => {
     <CardWrapper>
       {isLoading && <Loading color="var(--color-cyan)" />}
 
-      {!coinsData.length && !isLoading ? (
+      {filteredCoinsData.length > 0 ? (
+        filteredCoinsData.map((coin) => (
+          <Card key={coin.uuid}>
+            <CardHeader>
+              <img src={coin.iconUrl} />
+              <h2>{coin.name}</h2>
+            </CardHeader>
+            <CardBody>
+              <p>Price: {millify(Number(coin.price))}</p>
+              <p>Market cap: {millify(Number(coin.marketCap))}</p>
+              <p>Daily change: {coin.change}%</p>
+              <p>Rank: {coin.rank}</p>
+            </CardBody>
+          </Card>
+        ))
+      ) : !coinsData.length && !isLoading ? (
         <div>Cryptocurrencies not found!</div>
       ) : (
         coinsData.map((coin) => (
