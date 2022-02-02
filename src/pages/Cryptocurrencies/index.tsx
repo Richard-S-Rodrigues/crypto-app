@@ -17,7 +17,7 @@ const Cryptocurrencies = () => {
         />
 
         <main>
-          <CoinsCard searchValue={searchValue} />
+          <CoinsCard searchValue={searchValue.trim()} />
         </main>
       </Container>
     </Wrapper>
