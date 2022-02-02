@@ -54,30 +54,36 @@ const CoinsCard = ({ limit, noScrollLoad, searchValue }: ICoinsCardProps) => {
     setFilteredCoinsData([]);
 
     const getData = async (newLimit: number) => {
-      const coins = await getCoins(String(newLimit > 100 ? 100 : newLimit));
+      try {
+        const coins = await getCoins(String(newLimit > 100 ? 100 : newLimit));
 
-      if (coins) {
-        setCoinsData(coins);
-        console.log("Coins: ", coins);
+        if (coins) {
+          setCoinsData(coins);
+        }
+      } catch (error) {
+        console.error(error);
       }
     };
 
     const getFilteredData = async (name: string) => {
-      const coins = await getCoins("100");
-      console.log("Filtered: ", coins);
+      try {
+        const coins = await getCoins("100");
 
-      const filteredCoins = [] as ICoinsData[];
+        const filteredCoins = [] as ICoinsData[];
 
-      coins.forEach((coin) => {
-        if (coin.name.toLowerCase().indexOf(name) !== -1) {
-          filteredCoins.push(coin);
+        coins.forEach((coin) => {
+          if (coin.name.toLowerCase().indexOf(name) !== -1) {
+            filteredCoins.push(coin);
+          }
+        });
+
+        if (filteredCoins.length > 0) {
+          setFilteredCoinsData(filteredCoins);
+        } else {
+          setCoinsData([]);
         }
-      });
-
-      if (filteredCoins.length > 0) {
-        setFilteredCoinsData(filteredCoins);
-      } else {
-        setCoinsData([]);
+      } catch (error) {
+        console.error(error);
       }
     };
 
@@ -115,6 +121,7 @@ const CoinsCard = ({ limit, noScrollLoad, searchValue }: ICoinsCardProps) => {
           </Card>
         ))
       ) : (
+        coinsData.length > 0 &&
         coinsData.map((coin) => (
           <Card key={coin.uuid}>
             <CardHeader>

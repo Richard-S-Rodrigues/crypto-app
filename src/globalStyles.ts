@@ -42,6 +42,12 @@ export const Title = styled.h1`
   font-weight: 600;
 `;
 
+export const H2 = styled.h2`
+  font-size: 1em;
+  line-height: 1.5;
+  font-weight: 600;
+`;
+
 export const NormalLink = styled(Link)`
   color: var(--color-darker-cyan);
   text-decoration: none;

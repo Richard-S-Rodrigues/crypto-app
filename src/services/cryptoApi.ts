@@ -3,7 +3,7 @@ import axios from "axios";
 const api = axios.create({
   baseURL: "https://coinranking1.p.rapidapi.com",
   headers: {
-    "x-rapidapi-host": "coinranking1.p.rapidapi.com",
+    "x-rapidapi-host": import.meta.env.VITE_COINRANKING_RAPIDAPI_HOST as string,
     "x-rapidapi-key": import.meta.env.VITE_RAPIDAPI_KEY as string | number
   },
   params: {

@@ -10,21 +10,27 @@ import { NormalLink, Title } from "../../globalStyles";
 import { Wrapper, StatsWrapper } from "./styles";
 
 const Home = () => {
-  const [total24hVolume, setTotal24hVolume] = useState("");
+  const [total24hVolume, setTotal24hVolume] = useState(0);
   const [totalCoins, setTotalCoins] = useState(0);
   const [totalExchanges, setTotalExchanges] = useState(0);
-  const [totalMarketCap, setTotalMarketCap] = useState("");
+  const [totalMarketCap, setTotalMarketCap] = useState(0);
   const [totalMarkets, setTotalMarkets] = useState(0);
 
   useEffect(() => {
     const getData = async () => {
-      const cryptoStats = await getCryptoStats();
+      try {
+        const cryptoStats = await getCryptoStats();
 
-      setTotal24hVolume(cryptoStats.total24hVolume);
-      setTotalCoins(cryptoStats.totalCoins);
-      setTotalExchanges(cryptoStats.totalExchanges);
-      setTotalMarketCap(cryptoStats.totalMarketCap);
-      setTotalMarkets(cryptoStats.totalMarkets);
+        if (cryptoStats) {
+          setTotal24hVolume(Number(cryptoStats.total24hVolume));
+          setTotalCoins(cryptoStats.totalCoins);
+          setTotalExchanges(cryptoStats.totalExchanges);
+          setTotalMarketCap(Number(cryptoStats.totalMarketCap));
+          setTotalMarkets(cryptoStats.totalMarkets);
+        }
+      } catch (error) {
+        console.error(error);
+      }
     };
     getData();
   }, []);
@@ -37,7 +43,7 @@ const Home = () => {
           <StatsWrapper>
             <div>
               <small>Total 24h volume</small>
-              <span>${millify(Number(total24hVolume))}</span>
+              <span>${millify(total24hVolume)}</span>
             </div>
             <div>
               <small>Total coins</small>
@@ -49,7 +55,7 @@ const Home = () => {
             </div>
             <div>
               <small>Total Market cap</small>
-              <span>${millify(Number(totalMarketCap))}</span>
+              <span>${millify(totalMarketCap)}</span>
             </div>
             <div>
               <small>Total Markets</small>
