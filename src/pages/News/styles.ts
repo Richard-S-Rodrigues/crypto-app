@@ -9,17 +9,29 @@ export const Wrapper = styled.div`
   }
 
   main {
-    width: 80%;
+    width: 90%;
+    display: block;
     margin: 0 auto;
+
+    @media (min-width: 650px) {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(25em, 25%));
+      grid-gap: 2em;
+    }
   }
 `;
 
 export const NewsCard = styled.div`
   width: 100%;
-  margin: 2em auto;
+  margin-top: 1em;
   padding: 1em;
   background-color: #fff;
   border-radius: 0.25rem;
+
+  @media (min-width: 650px) {
+    width: auto;
+    height: auto;
+  }
 `;
 
 export const ImageContainer = styled.section`
