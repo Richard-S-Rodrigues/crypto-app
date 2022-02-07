@@ -4,7 +4,7 @@ import NavBar from "./components/NavBar";
 
 import Home from "./pages/Home";
 import Cryptocurrencies from "./pages/Cryptocurrencies";
-import Exchanges from "./pages/Exchanges";
+import Cryptocurrency from "./pages/Cryptocurrency";
 import News from "./pages/News";
 
 const AppRoutes = () => (
@@ -13,7 +13,7 @@ const AppRoutes = () => (
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/cryptocurrencies" element={<Cryptocurrencies />} />
-      <Route path="/exchanges" element={<Exchanges />} />
+      <Route path="/cryptocurrencies/:name" element={<Cryptocurrency />} />
       <Route path="/news" element={<News />} />
     </Routes>
   </BrowserRouter>

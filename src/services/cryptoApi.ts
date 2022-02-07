@@ -91,15 +91,3 @@ export const getCoinPriceHistory = async (coinId: string) => {
     console.log(err);
   }
 };
-
-export const getCoinExchanges = async (coinId: string) => {
-  try {
-    const response = await api.get(`/coin/${coinId}/exchanges`, {
-      params: { timePeriod: "24h" }
-    });
-
-    console.log(response);
-  } catch (err) {
-    console.log(err);
-  }
-};

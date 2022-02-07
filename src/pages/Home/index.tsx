@@ -7,7 +7,11 @@ import CoinsCard from "../../components/CoinsCard";
 
 import { NormalLink, Title } from "../../globalStyles";
 
-import { Wrapper, StatsWrapper } from "./styles";
+import {
+  Wrapper,
+  StatsWrapper,
+  CryptocurrenciesTitleContainer
+} from "./styles";
 
 const Home = () => {
   const [total24hVolume, setTotal24hVolume] = useState(0);
@@ -64,10 +68,10 @@ const Home = () => {
           </StatsWrapper>
         </section>
         <section>
-          <div>
+          <CryptocurrenciesTitleContainer>
             <Title>Top 10 Cryptocurrencies</Title>
             <NormalLink to="/cryptocurrencies">Show more</NormalLink>
-          </div>
+          </CryptocurrenciesTitleContainer>
           <CoinsCard limit={"10"} noScrollLoad />
         </section>
       </main>

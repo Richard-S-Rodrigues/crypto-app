@@ -4,7 +4,7 @@ import { NavLink } from "../../globalStyles";
 import { Wrapper, NavigationContainer } from "./styles";
 
 import { FaHome, FaCoins } from "react-icons/fa";
-import { BsCurrencyExchange, BsNewspaper } from "react-icons/bs";
+import { BsNewspaper } from "react-icons/bs";
 import { useLocation } from "react-router-dom";
 import Header from "../Header";
 
@@ -36,15 +36,6 @@ const NavBar = () => {
                 >
                   <FaCoins />
                   <span style={{ marginLeft: "1em" }}>Cryptocurrencies</span>
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  to="/exchanges"
-                  color={location === "/exchanges" ? "var(--color-cyan)" : ""}
-                >
-                  <BsCurrencyExchange />
-                  <span style={{ marginLeft: "1em" }}>Exchanges</span>
                 </NavLink>
               </li>
               <li>

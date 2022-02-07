@@ -2,7 +2,7 @@ import { Title, NavLink } from "../../globalStyles";
 
 import { CgClose } from "react-icons/cg";
 import { FaHome, FaCoins } from "react-icons/fa";
-import { BsCurrencyExchange, BsNewspaper } from "react-icons/bs";
+import { BsNewspaper } from "react-icons/bs";
 import { HamburgerMenu, HeaderWrapper, MenuWrapper } from "./styles";
 import { useLocation } from "react-router-dom";
 
@@ -62,16 +62,6 @@ const Header = ({ isMenu, setIsMenu }: IHeaderProps) => {
                   >
                     <FaCoins />
                     <span style={{ marginLeft: "1em" }}>Cryptocurrencies</span>
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink
-                    to="/exchanges"
-                    color={location === "/exchanges" ? "var(--color-cyan)" : ""}
-                    onClick={() => setIsMenu(false)}
-                  >
-                    <BsCurrencyExchange />
-                    <span style={{ marginLeft: "1em" }}>Exchanges</span>
                   </NavLink>
                 </li>
                 <li>

@@ -16,7 +16,7 @@ export const Card = styled.div`
   width: 100%;
   height: auto;
   border-radius: 0.5rem;
-  background-color: #ddd;
+  background-color: #fff;
   margin-top: 1em;
 `;
 

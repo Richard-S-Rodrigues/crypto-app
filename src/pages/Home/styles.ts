@@ -45,8 +45,10 @@ export const StatsWrapper = styled.div`
   }
 `;
 
-export const CryptocurrenciesContainer = styled.section`
-  & div:first-child {
+export const CryptocurrenciesTitleContainer = styled.div`
+  @media (min-width: 650px) {
     display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
 `;
