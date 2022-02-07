@@ -74,7 +74,9 @@ export const getCoin = async (coinId: string) => {
       params: { timePeriod: "24h" }
     });
 
-    console.log(response);
+    if (response.status === 200) {
+      return response.data.data.coin;
+    }
   } catch (err) {
     console.log(err);
   }

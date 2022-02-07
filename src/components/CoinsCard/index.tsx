@@ -1,4 +1,5 @@
 import { LegacyRef, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import millify from "millify";
 import handleViewport from "react-in-viewport";
 import { getCoins } from "../../services/cryptoApi";
@@ -48,6 +49,8 @@ const CoinsCard = ({ limit, noScrollLoad, searchValue }: ICoinsCardProps) => {
   const [filteredCoinsData, setFilteredCoinsData] = useState<ICoinsData[]>([]);
   const [newLimit, setNewLimit] = useState(Number(limit) || 50);
   const [isLoading, setIsLoading] = useState(true);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     setIsLoading(true);
@@ -107,7 +110,10 @@ const CoinsCard = ({ limit, noScrollLoad, searchValue }: ICoinsCardProps) => {
         <Loading color="var(--color-cyan)" />
       ) : filteredCoinsData.length > 0 ? (
         filteredCoinsData.map((coin) => (
-          <Card key={coin.uuid}>
+          <Card
+            key={coin.uuid}
+            onClick={() => navigate(`/cryptocurrencies/${coin.uuid}`)}
+          >
             <CardHeader>
               <img src={coin.iconUrl} />
               <h2>{coin.name}</h2>
@@ -123,7 +129,10 @@ const CoinsCard = ({ limit, noScrollLoad, searchValue }: ICoinsCardProps) => {
       ) : (
         coinsData.length > 0 &&
         coinsData.map((coin) => (
-          <Card key={coin.uuid}>
+          <Card
+            key={coin.uuid}
+            onClick={() => navigate(`/cryptocurrencies/${coin.uuid}`)}
+          >
             <CardHeader>
               <img src={coin.iconUrl} alt={coin.name} />
               <h2>{coin.name}</h2>

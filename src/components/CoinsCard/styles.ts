@@ -18,6 +18,13 @@ export const Card = styled.div`
   border-radius: 0.5rem;
   background-color: #fff;
   margin-top: 1em;
+  cursor: pointer;
+  transition: all 0.5s;
+
+  &:hover {
+    box-shadow: 2px 2px 15px 2px var(--color-grey);
+    transform: translateY(-1rem);
+  }
 `;
 
 export const CardHeader = styled.section`
