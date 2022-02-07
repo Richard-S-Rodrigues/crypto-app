@@ -11,9 +11,9 @@ export const Wrapper = styled.div`
   main {
     width: 90%;
     display: block;
-    margin: 0 auto;
+    margin: 1em auto;
 
-    @media (min-width: 650px) {
+    @media (min-width: 957px) {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(25em, 25%));
       grid-gap: 2em;
@@ -24,13 +24,13 @@ export const Wrapper = styled.div`
 export const NewsCard = styled.div`
   width: 100%;
   margin-top: 1em;
-  padding: 1em;
+  padding: 1.5em;
   background-color: #fff;
-  border-radius: 0.25rem;
+  border-radius: 0.5rem;
 
   @media (min-width: 650px) {
     width: auto;
-    height: auto;
+    height: fit-content;
   }
 `;
 
@@ -64,5 +64,25 @@ export const InfoContainer = styled.section`
 
   article {
     margin: 1em auto;
+  }
+
+  article p {
+    text-align: justify;
+    font-size: 1em;
+    line-height: 1.5em;
+  }
+`;
+
+export const ButtonLink = styled.a`
+  color: var(--color-darker-cyan);
+  text-decoration: none;
+  border: 1px solid var(--color-darker-cyan);
+  border-radius: 0.25rem;
+  padding: 0.5em;
+  font-weight: 600;
+  transition: all 1s;
+  &:hover {
+    background-color: var(--color-darker-cyan);
+    color: #fff;
   }
 `;

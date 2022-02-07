@@ -25,12 +25,7 @@ interface IGetCryptoNewsResponse {
     };
   };
   url: string;
-  about: ICryptoNewsContentAbout[];
   datePublished: string;
-}
-
-interface ICryptoNewsContentAbout {
-  name: string;
 }
 
 export const getCryptoNews = async (): Promise<IGetCryptoNewsResponse[]> => {

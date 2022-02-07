@@ -15,6 +15,7 @@ export const CardWrapper = styled.div`
 export const Card = styled.div`
   width: 100%;
   height: auto;
+  border-radius: 0.5rem;
   background-color: #ddd;
   margin-top: 1em;
 `;
