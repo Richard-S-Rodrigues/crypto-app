@@ -40,7 +40,7 @@ const News = () => {
     getData();
   }, []);
 
-  const formatDate = (date: string) => {
+  const formatDate = (date: string): string => {
     const rtf1 = new Intl.RelativeTimeFormat("en", {
       localeMatcher: "best fit",
       numeric: "always",
@@ -50,16 +50,10 @@ const News = () => {
     const hours = new Date(date).getHours();
     const minutes = new Date(date).getMinutes();
 
-    if (hours > 24) {
-      console.log(rtf1.format(1 - hours / 24, "day"));
-    } else if (hours > 0) {
-      console.log(rtf1.format(1 - hours, "hour"));
-    } else if (minutes > 0) {
-      console.log(rtf1.format(1 - minutes, "minute"));
-    } else {
-      console.log("Posted now");
+    if (hours > 0) {
+      return rtf1.format(1 - (new Date().getHours() - hours), "hour");
     }
-    //console.log(rtf1.formatToParts(-0.2431, "day"));
+    return rtf1.format(1 - (new Date().getMinutes() - minutes), "minute");
   };
   return (
     <Wrapper>
@@ -67,7 +61,8 @@ const News = () => {
       <main>
         {cryptoNews.map(
           ({ name, description, image, url, datePublished, about }) => {
-            formatDate(datePublished);
+            const timeAgo = formatDate(datePublished);
+
             return (
               <NewsCard key={uuidv4()}>
                 <ImageContainer>
@@ -76,7 +71,7 @@ const News = () => {
                 </ImageContainer>
                 <InfoContainer>
                   <div>
-                    <small>{datePublished}</small>
+                    <small>{timeAgo}</small>
                   </div>
                   <div>
                     <article>
